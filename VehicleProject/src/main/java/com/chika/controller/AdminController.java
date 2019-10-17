@@ -16,7 +16,7 @@ public class AdminController {
 	@Autowired
 	private AdminServ adminServ;
 	
-	@GetMapping("Admin/(admin_id")
+	@GetMapping("Admin/{admin_id}")
 	public ResponseEntity<AdminModel> getAdminById(@PathVariable("admin_id") Integer admin_id){
 		AdminModel adminst = adminServ.getAdminById(admin_id);
 		return new ResponseEntity<AdminModel>(adminst, HttpStatus.OK);
