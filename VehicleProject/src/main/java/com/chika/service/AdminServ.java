@@ -7,7 +7,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.chika.model.Admin;
-import com.chika.model.Customer;
 import com.chika.repository.AdminRep;
 
 @Service
