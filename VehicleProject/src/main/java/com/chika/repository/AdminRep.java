@@ -2,9 +2,9 @@ package com.chika.repository;
 
 import org.springframework.data.repository.CrudRepository;
 
-import com.chika.model.AdminModel;
+import com.chika.model.Admin;
 
-public interface AdminRep extends CrudRepository<AdminModel, Integer> {
+public interface AdminRep extends CrudRepository<Admin, Integer> {
 
 	
 

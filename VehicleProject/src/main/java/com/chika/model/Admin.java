@@ -8,16 +8,13 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.validation.constraints.Email;
 
-
-
 @Entity
-@Table(name="custhub")
-public class Customer {
-
+@Table(name="adminhub")
+public class Admin {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "cust_id")
-	private Integer cust_Id;
+	@Column(name = "admin_id")
+	private Integer admin_Id;
 	
 	@Column(name = "first_name")
 	private String first_name;
@@ -31,20 +28,19 @@ public class Customer {
 	@Column(name = "password")
 	private String password;
 	
-	 @Column(name = "contact")
-	private String contact;
-	 
-	 @Email
-	 @Column(name = "email")
+	@Email
+	@Column(name = "email")
 	private String email;
-	 
+	
+	@Column(name = "contact")
+	private String contact;
 
-	public Integer getCust_Id() {
-		return cust_Id;
+	public Integer getAdmin_Id() {
+		return admin_Id;
 	}
 
-	public void setCust_Id(Integer cust_Id) {
-		this.cust_Id = cust_Id;
+	public void setAdmin_Id(Integer admin_Id) {
+		this.admin_Id = admin_Id;
 	}
 
 	public String getFirst_name() {
@@ -79,14 +75,6 @@ public class Customer {
 		this.password = password;
 	}
 
-	public String getContact() {
-		return contact;
-	}
-
-	public void setContact(String contact) {
-		this.contact = contact;
-	}
-
 	public String getEmail() {
 		return email;
 	}
@@ -94,6 +82,15 @@ public class Customer {
 	public void setEmail(String email) {
 		this.email = email;
 	}
+
+	public String getContact() {
+		return contact;
+	}
+
+	public void setContact(String contact) {
+		this.contact = contact;
+	}
 	
+
 	
 }

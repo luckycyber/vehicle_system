@@ -12,43 +12,31 @@ public class ServiceCenter {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "servicehub_id")
+    @Column(name = "serv_id")
     private Long servicehubId;
 
-    @Column(name = "servicehub_name")
-    private String servicehubName;
+    @Column(name = "first_name")
+    private String first_name;
 
-    @Column(name = "servicehub_address")
+    @Column(name = "last_name")
+    private String last_name;
+    
+    @Column(name = "address")
     private String address;
 
-    @Column(name = "servicehub_contact")
+    @Column(name = "contact")
     private String contact;
     
     @Email
-    @Column(name = "servicehub_email")
+    @Column(name = "email")
     private String email;
     
-    @Column(name = "servicehub_password")
+    @Column(name = "password")
     private String password;
-
-    public ServiceCenter() {
-
-    }
     
-    
+    @Column(name = "serv_type")
+    private String serv_type;
 
-	public ServiceCenter(Long servicehubId, String servicehubName, String address, String contact, @Email String email,
-			String password) {
-		super();
-		this.servicehubId = servicehubId;
-		this.servicehubName = servicehubName;
-		this.address = address;
-		this.contact = contact;
-		this.email = email;
-		this.password = password;
-	}
-
-	
 	public Long getServicehubId() {
 		return servicehubId;
 	}
@@ -57,12 +45,20 @@ public class ServiceCenter {
 		this.servicehubId = servicehubId;
 	}
 
-	public String getServicehubName() {
-		return servicehubName;
+	public String getFirst_name() {
+		return first_name;
 	}
 
-	public void setServicehubName(String servicehubName) {
-		this.servicehubName = servicehubName;
+	public void setFirst_name(String first_name) {
+		this.first_name = first_name;
+	}
+
+	public String getLast_name() {
+		return last_name;
+	}
+
+	public void setLast_name(String last_name) {
+		this.last_name = last_name;
 	}
 
 	public String getAddress() {
@@ -96,11 +92,20 @@ public class ServiceCenter {
 	public void setPassword(String password) {
 		this.password = password;
 	}
-	@Override
-	public String toString() {
-		return super.toString();
+
+	public String getServ_type() {
+		return serv_type;
 	}
-	
+
+	public void setServ_type(String serv_type) {
+		this.serv_type = serv_type;
+	}
+    
+
+   
+    
+    
+
 	
 
 
