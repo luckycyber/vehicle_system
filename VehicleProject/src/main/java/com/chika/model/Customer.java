@@ -1,99 +1,96 @@
 package com.chika.model;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.Table;
-import javax.validation.constraints.Email;
+ 
 
+import javax.persistence.*;
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotNull;
 
 
 @Entity
-@Table(name="custhub")
+@Table(name = "custhub")
 public class Customer {
 
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "cust_id")
-	private Integer cust_Id;
-	
-	@Column(name = "first_name")
-	private String first_name;
-	
-	@Column(name = "last_name")
-	private String last_name;
-	
-	@Column(name = "address")
-	private String address;
-	
-	@Column(name = "password")
-	private String password;
-	
-	 @Column(name = "contact")
-	private String contact;
-	 
-	 @Email
-	 @Column(name = "email")
-	private String email;
-	 
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
 
-	public Integer getCust_Id() {
-		return cust_Id;
-	}
+    @NotNull
+    @Column(name = "first_name")
+    private String firstName;
 
-	public void setCust_Id(Integer cust_Id) {
-		this.cust_Id = cust_Id;
-	}
+    
+    @Column(name = "last_name")
+    private String lastName;
 
-	public String getFirst_name() {
-		return first_name;
-	}
+    @NotNull
+    @Email
+    @Column(unique = true)
+    private String email;
 
-	public void setFirst_name(String first_name) {
-		this.first_name = first_name;
-	}
+    @NotNull
+    private String contact;
+    
+    @NotNull
+    private String password;
 
-	public String getLast_name() {
-		return last_name;
-	}
+    @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "customer")
+    private Vehicle vehicle;
 
-	public void setLast_name(String last_name) {
-		this.last_name = last_name;
-	}
+    public Long getId() {
+        return id;
+    }
 
-	public String getAddress() {
-		return address;
-	}
+    public void setId(Long id) {
+        this.id = id;
+    }
 
-	public void setAddress(String address) {
-		this.address = address;
-	}
+    public String getFirstName() {
+        return firstName;
+    }
 
-	public String getPassword() {
-		return password;
-	}
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
+    }
 
-	public void setPassword(String password) {
-		this.password = password;
-	}
+    public String getLastName() {
+        return lastName;
+    }
 
-	public String getContact() {
-		return contact;
-	}
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
+    }
 
-	public void setContact(String contact) {
-		this.contact = contact;
-	}
+    public String getEmail() {
+        return email;
+    }
 
-	public String getEmail() {
-		return email;
-	}
+    public void setEmail(String email) {
+        this.email = email;
+    }
+    
 
-	public void setEmail(String email) {
-		this.email = email;
-	}
-	
-	
+   public String getContact() {
+    return contact;
+  }
+
+  public void setContact(String contact) {
+    this.contact = contact;
+   }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public Vehicle getVehicle() {
+        return vehicle;
+    }
+
+    public void setVehicle(Vehicle vehicle) {
+        this.vehicle = vehicle;
+    }
 }
