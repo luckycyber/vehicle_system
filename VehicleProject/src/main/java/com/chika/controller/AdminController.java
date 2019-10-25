@@ -35,36 +35,36 @@ public class AdminController {
         private AdminServ adServ;
         
 
-        @GetMapping("/ad}")
-        public ResponseEntity <Admin>getAdminById(@PathVariable("ad") Integer Admin_id) {
+        @GetMapping("/admin_id}")
+        public ResponseEntity <Admin>getAdminById(@PathVariable("admid_id") Integer Admin_id) {
         	Admin sus = adServ.getAdminById(Admin_id);
             
             return new ResponseEntity<Admin>(sus,HttpStatus.OK);
         }
         
-        @GetMapping("/ad")
+        @GetMapping("/ads")
         public ResponseEntity <List<Admin>>getAllAdmin() {
             List<Admin> sus = adServ.getAllAdmin();            
             return new ResponseEntity<>(sus,HttpStatus.OK);
         }
-        @PostMapping("/ad")
+        @PostMapping("/po")
            public ResponseEntity<Void> Admin(@RequestBody Admin sus, UriComponentsBuilder builder){
         	Admin flag = adServ.addAdmin(sus);
             if(flag==null)
                return new ResponseEntity<Void>(HttpStatus.CONFLICT);
             HttpHeaders header = new HttpHeaders();
-            header.setLocation(builder.path("/ad")
+            header.setLocation(builder.path("/po")
                     .buildAndExpand(sus.getAdmin_id()).toUri());
             return new ResponseEntity<Void>(header, HttpStatus.CREATED);
         }
        
-        @PutMapping("/ad")
+        @PutMapping("/pi")
         public ResponseEntity<Admin> updateAdmin(@RequestBody Admin sus){
         adServ.updateAdmin(sus);
          return new ResponseEntity<Admin>(sus, HttpStatus.OK);
          
      }
-        @DeleteMapping("/ad")
+        @DeleteMapping("/de")
         public ResponseEntity<Admin> deleteAdmin(@RequestBody Admin sus){
         adServ.deleteAdmin(sus);
          return new ResponseEntity<Admin>(sus, HttpStatus.OK);

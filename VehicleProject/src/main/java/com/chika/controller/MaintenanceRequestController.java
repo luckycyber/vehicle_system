@@ -33,36 +33,36 @@ public class MaintenanceRequestController {
 	    @Autowired
 	    private MaintenanceRequestServ requestServ;
 	               
-        @GetMapping("/{ma}")
-        public ResponseEntity <MaintenanceRequest>getMaintenanceRequestById(@PathVariable("ma") Long MaintenanceRequest_id) {
+        @GetMapping("/{maintenanceRequest_id}")
+        public ResponseEntity <MaintenanceRequest>getMaintenanceRequestById(@PathVariable("maintenanceRequest_id") Long MaintenanceRequest_id) {
 	    MaintenanceRequest sus = requestServ.getMaintenanceRequestById(MaintenanceRequest_id);
 	        	            
 	    return new ResponseEntity<MaintenanceRequest>(sus,HttpStatus.OK);
 	       }
 	        	        
-	       @GetMapping("/ma")
+	       @GetMapping("/mas")
 	      public ResponseEntity <List<MaintenanceRequest>>getAllMaintenanceRequest() {
 	      List<MaintenanceRequest> sus = requestServ.getAllMaintenanceRequest();            
 	        return new ResponseEntity<>(sus,HttpStatus.OK);
 	        	        }
-	       @PostMapping("/ma")
+	       @PostMapping("/mu")
 	       public ResponseEntity<Void> MaintenanceRequest(@RequestBody MaintenanceRequest sus, UriComponentsBuilder builder){
 	       MaintenanceRequest flag = requestServ.addMaintenanceRequest(sus);
 	       if(flag==null)
 	       return new ResponseEntity<Void>(HttpStatus.CONFLICT);
 	       HttpHeaders header = new HttpHeaders();
-	       header.setLocation(builder.path("/ma")
+	       header.setLocation(builder.path("/mu")
 	        .buildAndExpand(sus.getMaintenanceRequest_id()).toUri());
 	       return new ResponseEntity<Void>(header, HttpStatus.CREATED);
 	         }
 	        	       
-	         @PutMapping("/ma")
+	         @PutMapping("/mo")
 	        	        public ResponseEntity<MaintenanceRequest> updateCustomer(@RequestBody MaintenanceRequest sus){
 	        	        requestServ.updateMaintenanceRequest(sus);
 	        	         return new ResponseEntity<MaintenanceRequest>(sus, HttpStatus.OK);
 	        	         
 	        	     }
-	        	        @DeleteMapping("/ma")
+	        	        @DeleteMapping("/mi")
 	        	        public ResponseEntity<MaintenanceRequest> deleteMaintenanceRequest(@RequestBody MaintenanceRequest sus){
 	        	        requestServ.deleteMaintenanceRequest(sus);
 	        	         return new ResponseEntity<MaintenanceRequest>(sus, HttpStatus.OK);

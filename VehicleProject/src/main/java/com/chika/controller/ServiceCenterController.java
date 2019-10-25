@@ -31,36 +31,36 @@ public class ServiceCenterController {
    
     	    
     	       
-    	        @GetMapping("/{ser}")
-    	        public ResponseEntity <ServiceCenter>getCustomerById(@PathVariable("ser") Long ServiceCenter_id) {
+    	        @GetMapping("/{ServiceCenter_id}")
+    	        public ResponseEntity <ServiceCenter>getCustomerById(@PathVariable("ServiceCenter_id") Long ServiceCenter_id) {
     	        	ServiceCenter sus = enterServ.getServiceCenterById(ServiceCenter_id);
     	            
     	            return new ResponseEntity<ServiceCenter>(sus,HttpStatus.OK);
     	        }
     	        
-    	        @GetMapping("/ser")
+    	        @GetMapping("/sers")
     	        public ResponseEntity <List<ServiceCenter>>getAllServiceCenter() {
     	            List<ServiceCenter> sus = enterServ.getAllServiceCenter();            
     	            return new ResponseEntity<>(sus,HttpStatus.OK);
     	        }
-    	        @PostMapping("/ser")
+    	        @PostMapping("/su")
     	           public ResponseEntity<Void> Customer(@RequestBody ServiceCenter sus, UriComponentsBuilder builder){
     	        	ServiceCenter flag = enterServ.addServiceCenter(sus);
     	            if(flag==null)
     	               return new ResponseEntity<Void>(HttpStatus.CONFLICT);
     	            HttpHeaders header = new HttpHeaders();
-    	            header.setLocation(builder.path("/cus")
+    	            header.setLocation(builder.path("/su")
     	                    .buildAndExpand(sus.getServiceCenter_id()).toUri());
     	            return new ResponseEntity<Void>(header, HttpStatus.CREATED);
     	        }
     	       
-    	        @PutMapping("/ser")
+    	        @PutMapping("/si")
     	        public ResponseEntity<ServiceCenter> updateCustomer(@RequestBody ServiceCenter sus){
     	        enterServ.updateServiceCenter(sus);
     	         return new ResponseEntity<ServiceCenter>(sus, HttpStatus.OK);
     	         
     	     }
-    	        @DeleteMapping("/ser")
+    	        @DeleteMapping("/sa")
     	        public ResponseEntity<ServiceCenter> deleteServiceCenter(@RequestBody ServiceCenter sus){
     	        enterServ.deleteServiceCenter(sus);
     	         return new ResponseEntity<ServiceCenter>(sus, HttpStatus.OK);

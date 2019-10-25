@@ -35,30 +35,30 @@ public class WorkerController {
     private WorkerServ woServ;
     
 
-    @GetMapping("/{wor}")
-    public ResponseEntity <Worker>getWorkerById(@PathVariable("wor") Integer Work_id) {
+    @GetMapping("/{work_id}")
+    public ResponseEntity <Worker>getWorkerById(@PathVariable("work_id") Integer Work_id) {
     	Worker sus = woServ.getWorkerById(Work_id);
         
         return new ResponseEntity<Worker>(sus,HttpStatus.OK);
     }
     
-    @GetMapping("/wor")
+    @GetMapping("/workers")
     public ResponseEntity <List<Worker>>getAllWorker() {
         List<Worker> sus = woServ.getAllWorker();            
         return new ResponseEntity<>(sus,HttpStatus.OK);
     }
-    @PostMapping("/wor")
+    @PostMapping("/works")
        public ResponseEntity<Void> Worker(@RequestBody Worker sus, UriComponentsBuilder builder){
     	Worker flag = woServ.addWorker(sus);
         if(flag==null)
            return new ResponseEntity<Void>(HttpStatus.CONFLICT);
         HttpHeaders header = new HttpHeaders();
-        header.setLocation(builder.path("/wor")
+        header.setLocation(builder.path("/works")
                 .buildAndExpand(sus.getWork_id()).toUri());
         return new ResponseEntity<Void>(header, HttpStatus.CREATED);
     }
    
-    @PutMapping("/wor")
+    @PutMapping("/win")
     public ResponseEntity<Worker> updateWorker(@RequestBody Worker sus){
     woServ.updateWorker(sus);
      return new ResponseEntity<Worker>(sus, HttpStatus.OK);

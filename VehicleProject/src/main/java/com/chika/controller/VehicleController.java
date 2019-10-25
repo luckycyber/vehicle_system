@@ -20,11 +20,6 @@ import org.springframework.web.util.UriComponentsBuilder;
 import com.chika.model.Vehicle;
 import com.chika.service.VehicleServ;
 
-
-
-
-
-
 @RestController
 @CrossOrigin(origins="http://localhost:4200")
 @RequestMapping(value="/api")
@@ -36,25 +31,25 @@ public class VehicleController {
    
     	    
     	       
-    	        @GetMapping("/{veh}")
-    	        public ResponseEntity <Vehicle>getVehicleById(@PathVariable("veh") Long Vehicle_id) {
+    	        @GetMapping("/{vehicle_id}")
+    	        public ResponseEntity <Vehicle>getVehicleById(@PathVariable("vehicle_id") Long Vehicle_id) {
     	        	Vehicle sus = vehServ.getVehicleById(Vehicle_id);
     	            
     	            return new ResponseEntity<Vehicle>(sus,HttpStatus.OK);
     	        }
     	        
-    	        @GetMapping("/veh")
+    	        @GetMapping("/vehicles")
     	        public ResponseEntity <List<Vehicle>>getAllVehicle() {
     	            List<Vehicle> sus = vehServ.getAllVehicle();            
     	            return new ResponseEntity<>(sus,HttpStatus.OK);
     	        }
-    	        @PostMapping("/veh")
+    	        @PostMapping("/vu")
     	           public ResponseEntity<Void>Vehicle(@RequestBody Vehicle sus, UriComponentsBuilder builder){
     	        	Vehicle flag = vehServ.addVehicle(sus);
     	            if(flag==null)
     	               return new ResponseEntity<Void>(HttpStatus.CONFLICT);
     	            HttpHeaders header = new HttpHeaders();
-    	            header.setLocation(builder.path("/veh")
+    	            header.setLocation(builder.path("/vu")
     	                    .buildAndExpand(sus.getVehicle_id()).toUri());
     	            return new ResponseEntity<Void>(header, HttpStatus.CREATED);
     	        }
@@ -65,7 +60,7 @@ public class VehicleController {
     	         return new ResponseEntity<Vehicle>(sus, HttpStatus.OK);
     	         
     	     }
-    	        @DeleteMapping("/veh")
+    	        @DeleteMapping("/vim")
     	        public ResponseEntity<Vehicle> deleteVehicle(@RequestBody Vehicle sus){
     	       vehServ.deleteVehicle(sus);
     	         return new ResponseEntity<Vehicle>(sus, HttpStatus.OK);

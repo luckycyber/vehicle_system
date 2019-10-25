@@ -16,7 +16,7 @@ import org.springframework.data.annotation.Transient;
 
 
 @Entity
-@Table(name = "custhub")
+@Table(name = "customerhub")
 public class Customer {
 
     @Id
@@ -40,7 +40,7 @@ public class Customer {
 	private String lastName;
 
 	@Column(name = "contact")
-    private int contact;
+    private long contact;
     
    
 	@OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy="customer")
@@ -91,15 +91,19 @@ public class Customer {
     }
     
 
-   public int getContact() {
-    return contact;
-  }
 
-  public void setContact(int contact) {
-    this.contact = contact;
-   }
 
-    public String getPassword() {
+    public long getContact() {
+		return contact;
+	}
+
+
+	public void setContact(long contact) {
+		this.contact = contact;
+	}
+
+
+	public String getPassword() {
         return password;
     }
 
