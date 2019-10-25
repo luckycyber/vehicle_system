@@ -7,8 +7,7 @@ import java.util.*;
 import javax.persistence.*;
 import javax.validation.Valid;
 import javax.validation.constraints.Email;
-
-
+import javax.validation.constraints.Size;
 
 import org.springframework.data.annotation.Transient;
 
@@ -16,7 +15,7 @@ import org.springframework.data.annotation.Transient;
 
 
 @Entity
-@Table(name = "customerhub")
+@Table(name = "customhub")
 public class Customer {
 
     @Id
@@ -40,7 +39,7 @@ public class Customer {
 	private String lastName;
 
 	@Column(name = "contact")
-    private long contact;
+    private String contact;
     
    
 	@OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy="customer")
@@ -91,14 +90,12 @@ public class Customer {
     }
     
 
-
-
-    public long getContact() {
+	public String getContact() {
 		return contact;
 	}
 
 
-	public void setContact(long contact) {
+	public void setContact(String contact) {
 		this.contact = contact;
 	}
 
