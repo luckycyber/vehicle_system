@@ -1,53 +1,53 @@
 package com.chika.service;
 
+
 import java.util.ArrayList;
 import java.util.List;
-
-
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-
+import com.chika.DAO.CustomerRepo;
 import com.chika.model.Customer;
 
-import com.chika.repository.CustRep;
-
 @Service
-
 public class CustServ {
-
-	 @Autowired
-	    private CustRep custRepo;
-	        
-	    	public Customer getCustomerById(Long custId) {
-	    		Customer custo= custRepo.findById(custId).get();
-	    		return custo;
-	    	}
-	    	
-
-	    	public List<Customer> getAllCustomers(){
-	    		List<Customer> list = new ArrayList<>();
-	    		custRepo.findAll().forEach(e->list.add(e));
-	    		return list;
-	    	}
-
-	    public Customer addCustomer(Customer customer){
-	        return custRepo.save(customer);
-	    }
-
-	    public void deleteCustomer(Customer customer){
-	        custRepo.delete(customer);
-	    }
-
-	    public void clearCustomers(List<Customer> customers){
-	      custRepo.deleteAll(customers);
-	    }
-
-		public void updateCustomer(Customer cu) {
-			custRepo.save(cu);
-			
-			
-		}
-
-	}
+	
+    @Autowired
+    private CustomerRepo custRepo;
+    
+    
+    public Customer getCustomerById(Long cust_id)
+    {
+        Customer cus= custRepo.findById(cust_id).get();
+ 
+        return cus;    
+    }
+    
+    public List<Customer> getAllCustomer(){
+        List<Customer> list = new ArrayList<>();
+         custRepo.findAll().forEach(cust->list.add(cust));
+         //custRepo.findAll();
+        return list;
+        
+    }
+    public List<Customer> addAllCustomer(List<Customer> cust){
+        List<Customer> list = new ArrayList<>();
+        custRepo.saveAll(list);
+        return list;
+        
+        
+    }
+    public Customer addCustomer(Customer cus){
+        custRepo.save(cus);
+        return cus;
+        
+    }
+    public void updateCustomer(Customer cus) {
+        custRepo.save(cus);
+    }
+    public void deleteCustomer(Customer cus) {
+        custRepo.delete(cus);
+    }
+    
+    
+}

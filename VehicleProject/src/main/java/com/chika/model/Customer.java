@@ -2,9 +2,17 @@ package com.chika.model;
 
  
 
+import java.util.*;
+
 import javax.persistence.*;
+import javax.validation.Valid;
 import javax.validation.constraints.Email;
-import javax.validation.constraints.NotNull;
+
+
+
+import org.springframework.data.annotation.Transient;
+
+
 
 
 @Entity
@@ -13,39 +21,52 @@ public class Customer {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
-
-    @NotNull
-    @Column(name = "first_name")
-    private String firstName;
-
+    @Column(name="cust_id")
+    private Long cust_id;
     
-    @Column(name = "last_name")
-    private String lastName;
+	@Column(name = "email")
+	@Email
+	@Valid
+	private String email;
+	
+	@Column(name = "password")
+	@Transient
+	private String password;
+	
+	@Column(name = "first_name")
+	private String firstName;
+	
+	@Column(name = "last_name")
+	private String lastName;
 
-    @NotNull
-    @Email
-    @Column(unique = true)
-    private String email;
-
-    @NotNull
-    private String contact;
+	@Column(name = "contact")
+    private int contact;
     
-    @NotNull
-    private String password;
-
+   
+	@OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy="customer")
+	private Set<MaintenanceRequest> maintenanceRequest = new HashSet<>();
+	
+    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "customer")
+    private Set<Vehicle> vehicle = new HashSet<>();
+    
     @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "customer")
-    private Vehicle vehicle;
+    private ServiceCenter serviceCenter;
+    
 
-    public Long getId() {
-        return id;
+    public Customer() {
+    	
     }
+    
+    
+    public Long getCust_id() {
+		return cust_id;
+	}
 
-    public void setId(Long id) {
-        this.id = id;
-    }
+	public void setCust_id(Long cust_id) {
+		this.cust_id = cust_id;
+	}
 
-    public String getFirstName() {
+	public String getFirstName() {
         return firstName;
     }
 
@@ -70,11 +91,11 @@ public class Customer {
     }
     
 
-   public String getContact() {
+   public int getContact() {
     return contact;
   }
 
-  public void setContact(String contact) {
+  public void setContact(int contact) {
     this.contact = contact;
    }
 
@@ -86,11 +107,31 @@ public class Customer {
         this.password = password;
     }
 
-    public Vehicle getVehicle() {
-        return vehicle;
-    }
 
-    public void setVehicle(Vehicle vehicle) {
-        this.vehicle = vehicle;
-    }
+	public Set<Vehicle> getVehicle() {
+		return vehicle;
+	}
+
+
+	public void setVehicle(Set<Vehicle> vehicle) {
+		this.vehicle = vehicle;
+	}
+
+
+	public ServiceCenter getServiceCenter() {
+		return serviceCenter;
+	}
+
+	public void setServiceCenter(ServiceCenter serviceCenter) {
+		this.serviceCenter = serviceCenter;
+	}
+    
+	public Set<MaintenanceRequest> getMaintenanceRequest() {
+		return maintenanceRequest;
+	}
+
+	public void setMaintenanceRequest(Set<MaintenanceRequest> maintenanceRequest) {
+		this.maintenanceRequest = maintenanceRequest;
+	}
+    
 }

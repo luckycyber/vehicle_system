@@ -1,53 +1,54 @@
 package com.chika.service;
 
 
-import com.chika.model.Worker;
-
-import com.chika.repository.WorkerRep;
-
+import java.util.ArrayList;
+import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
-import java.util.List;
-
+import com.chika.DAO.WorkerRep;
+import com.chika.model.Worker;
 
 @Service
 public class WorkerServ {
 
+
+
     @Autowired
-    private WorkerRep workRepo;
+    private WorkerRep worRep;
+    
+    
+    public Worker getWorkerById(Integer Work_id)
+    {
+    	Worker sus= worRep.findById(Work_id).get();
+ 
+        return sus;    
+    }
+    
+    public List<Worker> getAllWorker(){
+        List<Worker> list = new ArrayList<>();
+         worRep.findAll().forEach(wor->list.add(wor));
+        return list;
         
-    	public Worker getWorkerById(Integer work_Id) {
-    		Worker wo = workRepo.findById(work_Id).get();
-    		return wo;
-    	}
+    }
+    public List<Worker> addAllWorker(List<Worker> sus){
+        List<Worker> list = new ArrayList<>();
+        worRep.saveAll(list);
+        return list;
         
-
-    	public List<Worker> getAllWorkers(){
-    		List<Worker> list = new ArrayList<>();
-    		workRepo.findAll().forEach(e->list.add(e));
-    		return list;
-    	}
-
-    public Worker addWorker(Worker worker){
-        return workRepo.save(worker);
+        
     }
-
-    public void deleteWorker(Worker worker){
-        workRepo.delete(worker);
+    public Worker addWorker(Worker sus){
+        worRep.save(sus);
+        return sus;
+        
     }
-
-    public void clearWorkers(List<Worker> workers){
-        workRepo.deleteAll(workers);
+    public void updateWorker(Worker sus) {
+        worRep.save(sus);
     }
-
-
-	public void updateWorker(Worker wo) {
-		 workRepo.save(wo);
-		
-	}
-
+    public void deleteWorker(Worker sus) {
+        worRep.delete(sus);
+    }
+    
+    
 }
-
-

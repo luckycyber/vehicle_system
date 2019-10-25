@@ -13,8 +13,8 @@ import javax.validation.constraints.Email;
 public class Admin {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "admin_id")
-	private Integer admin_Id;
+	@Column(name = "id")
+	private Integer admin_id;
 	
 	@Column(name = "first_name")
 	private String first_name;
@@ -35,12 +35,13 @@ public class Admin {
 	@Column(name = "contact")
 	private String contact;
 
-	public Integer getAdmin_Id() {
-		return admin_Id;
+
+	public Integer getAdmin_id() {
+		return admin_id;
 	}
 
-	public void setAdmin_Id(Integer admin_Id) {
-		this.admin_Id = admin_Id;
+	public void setAdmin_id(Integer admin_id) {
+		this.admin_id = admin_id;
 	}
 
 	public String getFirst_name() {

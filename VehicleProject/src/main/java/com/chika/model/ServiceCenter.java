@@ -1,8 +1,10 @@
 package com.chika.model;
 
 import javax.persistence.*;
-
+import javax.validation.Valid;
 import javax.validation.constraints.Email;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 
 
@@ -12,69 +14,45 @@ public class ServiceCenter {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "serv_id")
-    private Long servicehubId;
+	@Column(name="id")
+    private Long serviceCenter_id;
 
-    @Column(name = "first_name")
-    private String first_name;
-
-    @Column(name = "last_name")
-    private String last_name;
+    @Column(name = "branch_name")
+    private String branchName;
+    
+    @Email
+    @Valid
+    @Column(name = "email")
+    private String email;
+    
+    @Column(name = "contact")
+    private int contact;
     
     @Column(name = "address")
     private String address;
 
-    @Column(name = "contact")
-    private String contact;
     
-    @Email
-    @Column(name = "email")
-    private String email;
-    
-    @Column(name = "password")
-    private String password;
-    
-    @Column(name = "serv_type")
-    private String serv_type;
+    @OneToOne(fetch = FetchType.LAZY, optional = false)
+    @JoinColumn(name = "serviceCenter_id", nullable = false)
+   
+    @JsonIgnore
+    private Customer customer;
 
-	public Long getServicehubId() {
-		return servicehubId;
+
+	public Long getServiceCenter_id() {
+		return serviceCenter_id;
 	}
 
-	public void setServicehubId(Long servicehubId) {
-		this.servicehubId = servicehubId;
+	public void setServiceCenter_id(Long serviceCenter_id) {
+		this.serviceCenter_id = serviceCenter_id;
 	}
 
-	public String getFirst_name() {
-		return first_name;
+	public String getBranchName() {
+		return branchName;
 	}
 
-	public void setFirst_name(String first_name) {
-		this.first_name = first_name;
-	}
-
-	public String getLast_name() {
-		return last_name;
-	}
-
-	public void setLast_name(String last_name) {
-		this.last_name = last_name;
-	}
-
-	public String getAddress() {
-		return address;
-	}
-
-	public void setAddress(String address) {
-		this.address = address;
-	}
-
-	public String getContact() {
-		return contact;
-	}
-
-	public void setContact(String contact) {
-		this.contact = contact;
+	public void setBranchName(String branchName) {
+		this.branchName = branchName;
 	}
 
 	public String getEmail() {
@@ -85,30 +63,29 @@ public class ServiceCenter {
 		this.email = email;
 	}
 
-	public String getPassword() {
-		return password;
+	public int getContact() {
+		return contact;
 	}
 
-	public void setPassword(String password) {
-		this.password = password;
+	public void setContact(int contact) {
+		this.contact = contact;
 	}
 
-	public String getServ_type() {
-		return serv_type;
+	public String getAddress() {
+		return address;
 	}
 
-	public void setServ_type(String serv_type) {
-		this.serv_type = serv_type;
+	public void setAddress(String address) {
+		this.address = address;
 	}
-    
 
-   
-    
-    
+	public Customer getCustomer() {
+		return customer;
+	}
 
-	
+	public void setCustomer(Customer customer) {
+		this.customer = customer;
+	}
 
-
-   
-	
+    	
 }

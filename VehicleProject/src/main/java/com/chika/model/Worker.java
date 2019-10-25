@@ -8,89 +8,80 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.validation.constraints.Email;
 
+import org.springframework.data.annotation.Transient;
+
+
 @Entity
-@Table(name="workhub")
+@Table(name = "workerhub")
 public class Worker {
+  
+	    @Id
+	    @GeneratedValue(strategy = GenerationType.IDENTITY)
+	    @Column(name="id")
+	    private Integer work_id;
+	    
+		@Column(name = "email", nullable = false, unique = true)
+		@Email
+		private String email;
+		
+		@Column(name = "password")
+		@Transient
+		private String password;
+		
+		@Column(name = "first_name")
+		private String firstName;
+		
+		@Column(name = "last_name")
+		private String lastName;
 
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "work_id")
-	private Integer work_Id;
-	
-	@Column(name = "first_name")
-	private String first_name;
-	
-	@Column(name = "last_name")
-	private String last_name;
-	
-	@Column(name = "address")
-	private String address;
-	
-	@Column(name = "password")
-	private String password;
-	
-	 @Column(name = "contact")
-	private String contact;
-	 
-	 @Email
-	 @Column(name = "email")
-	private String email;
+		@Column(name = "contact")
+	    private int contact;
 
-	public Integer getWork_Id() {
-		return work_Id;
-	}
+		public Integer getWork_id() {
+			return work_id;
+		}
 
-	public void setWork_Id(Integer work_Id) {
-		this.work_Id = work_Id;
-	}
+		public void setWork_id(Integer work_id) {
+			this.work_id = work_id;
+		}
 
-	public String getFirst_name() {
-		return first_name;
-	}
+		public String getEmail() {
+			return email;
+		}
 
-	public void setFirst_name(String first_name) {
-		this.first_name = first_name;
-	}
+		public void setEmail(String email) {
+			this.email = email;
+		}
 
-	public String getLast_name() {
-		return last_name;
-	}
+		public String getPassword() {
+			return password;
+		}
 
-	public void setLast_name(String last_name) {
-		this.last_name = last_name;
-	}
+		public void setPassword(String password) {
+			this.password = password;
+		}
 
-	public String getAddress() {
-		return address;
-	}
+		public String getFirstName() {
+			return firstName;
+		}
 
-	public void setAddress(String address) {
-		this.address = address;
-	}
+		public void setFirstName(String firstName) {
+			this.firstName = firstName;
+		}
 
-	public String getPassword() {
-		return password;
-	}
+		public String getLastName() {
+			return lastName;
+		}
 
-	public void setPassword(String password) {
-		this.password = password;
-	}
+		public void setLastName(String lastName) {
+			this.lastName = lastName;
+		}
 
-	public String getContact() {
-		return contact;
-	}
+		public int getContact() {
+			return contact;
+		}
 
-	public void setContact(String contact) {
-		this.contact = contact;
-	}
-
-	public String getEmail() {
-		return email;
-	}
-
-	public void setEmail(String email) {
-		this.email = email;
-	}
-	 
-	 
+		public void setContact(int contact) {
+			this.contact = contact;
+		}
 }

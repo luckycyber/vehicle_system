@@ -1,20 +1,19 @@
 package com.chika.model;
 
-
-
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
+import java.sql.Date;
 
 import javax.persistence.*;
-
-
 
 @Entity
 @Table(name = "vehiclehub")
 public class Vehicle {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    @Column(name="id")
+    private Long vehicle_id;
 
     @Column(name="vehicle_number")
     private String vehicleNumber;
@@ -27,29 +26,28 @@ public class Vehicle {
     private String vehicleBrand;
     
     @Column(name="warranty_Start_Date")
-    private String warrantyStartDate;
+    @JsonFormat(shape=JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm")
+    private Date warrantyStartDate;
 
     @Column(name="warranty_End_Date")
-    private String warrantyEndDate;
+    @JsonFormat(shape=JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm")
+    private Date warrantyEndDate;
 
     
 
-    @OneToOne(fetch = FetchType.LAZY, optional = false)
-    @JoinColumn(name = "id", nullable = false)
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @JoinColumn(name = "vehicle_id", nullable = false)
    
     @JsonIgnore
     private Customer customer;
 
 
-
-	public Long getId() {
-		return id;
+	public Long getVehicle_id() {
+		return vehicle_id;
 	}
 
-
-
-	public void setId(Long id) {
-		this.id = id;
+	public void setVehicle_id(Long vehicle_id) {
+		this.vehicle_id = vehicle_id;
 	}
 
 
@@ -65,7 +63,6 @@ public class Vehicle {
 	}
 
 
-
 	public String getVehicleModel() {
 		return vehicleModel;
 	}
@@ -78,37 +75,26 @@ public class Vehicle {
 		return vehicleBrand;
 	}
 
-
-
 	public void setVehicleBrand(String vehicleBrand) {
 		this.vehicleBrand = vehicleBrand;
 	}
 
-
-
-	public String getWarrantyStartDate() {
+	public Date getWarrantyStartDate() {
 		return warrantyStartDate;
 	}
 
-
-
-	public void setWarrantyStartDate(String warrantyStartDate) {
+	public void setWarrantyStartDate(Date warrantyStartDate) {
 		this.warrantyStartDate = warrantyStartDate;
 	}
 
-
-
-	public String getWarrantyEndDate() {
+	public Date getWarrantyEndDate() {
 		return warrantyEndDate;
 	}
 
 
-
-	public void setWarrantyEndDate(String warrantyEndDate) {
+	public void setWarrantyEndDate(Date warrantyEndDate) {
 		this.warrantyEndDate = warrantyEndDate;
 	}
-
-
 
 	public Customer getCustomer() {
 		return customer;
